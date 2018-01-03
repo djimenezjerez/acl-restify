@@ -4,7 +4,7 @@
     "email": "djimenezjerez@gmail.com"
   },
   "bugs": {
-    "url": "https://github.com/ojengwa/restify-acl/issues"
+    "url": "https://github.com/djimenezjerez/acl-restify/issues"
   },
   "bundleDependencies": false,
   "dependencies": {
@@ -31,7 +31,7 @@
     "mocha": "2.4.5",
     "node-mocks-http": "1.5.2"
   },
-  "homepage": "https://github.com/ojengwa/restify-acl#readme",
+  "homepage": "https://github.com/djimenezjerez/acl-restify#readme",
   "keywords": [
     "acl",
     "restify",
@@ -50,7 +50,7 @@
   "name": "acl-restify",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ojengwa/restify-acl.git"
+    "url": "git+https://github.com/djimenezjerez/acl-restify.git"
   },
   "scripts": {
     "test": "gulp test"
