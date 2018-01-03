@@ -1,15 +1,15 @@
 # Restify ACL
 
 
-[![Build Status](https://travis-ci.org/ojengwa/restify-acl.svg?branch=master)](https://travis-ci.org/ojengwa/restify-acl)
-[![Coverage Status](https://coveralls.io/repos/github/ojengwa/restify-acl/badge.svg?branch=master)](https://coveralls.io/github/ojengwa/restify-acl?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/43a996be6b1a4153aac74751115d97a0)](https://www.codacy.com/app/bernard/restify-acl)
+[![Build Status](https://travis-ci.org/djimenezjerez/acl-restify.svg?branch=master)](https://travis-ci.org/djimenezjerez/acl-restify)
+[![Coverage Status](https://coveralls.io/repos/github/djimenezjerez/acl-restify/badge.svg?branch=master)](https://coveralls.io/github/djimenezjerez/acl-restify?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/43a996be6b1a4153aac74751115d97a0)](https://www.codacy.com/app/bernard/acl-restify)
 
 
-Restify Access Control Lists (restify-acl) enables you to manage the requests made to your restify server. It makes use of ACL rules to protect your sever from unauthorized access. ACLs defines which user groups are granted access and the type of access they have against a specified resource. When a request is received against a resource, `restify-acl` checks the corresponding ACL policy to verify if the requester has the necessary access permissions.
+Restify Access Control Lists (acl-restify) enables you to manage the requests made to your restify server. It makes use of ACL rules to protect your sever from unauthorized access. ACLs defines which user groups are granted access and the type of access they have against a specified resource. When a request is received against a resource, `acl-restify` checks the corresponding ACL policy to verify if the requester has the necessary access permissions.
 
 ##### What are ACL rules
-ACL is a set of rules that tell `restify-acl` how to handle the requests made to your server against a specific resource. Think of them like road signs or traffic lights that control how your traffic flows in your app. ACL rules are defined in JSON or yaml syntax.
+ACL is a set of rules that tell `acl-restify` how to handle the requests made to your server against a specific resource. Think of them like road signs or traffic lights that control how your traffic flows in your app. ACL rules are defined in JSON or yaml syntax.
 
 **Example**
 ``` json
@@ -47,25 +47,25 @@ The contents of this file will be discussed in the usage section
 
 ## Installation
 
-You can download `restify-acl` from NPM
+You can download `acl-restify` from NPM
 ```bash
 
-$ npm install restify-acl
+$ npm install acl-restify
 
 ```
 
-then in your project require restify-acl
+then in your project require acl-restify
 
 ``` js
 
-const acl =  require('restify-acl');
+const acl =  require('acl-restify');
 
 ```
 
  or GitHub
 
  ```
-$ git clone https://github.com/ojengwa/restify-acl.git
+$ git clone https://github.com/djimenezjerez/acl-restify.git
 
   ```
 copy the lib folder to your project and then require `nacl.js`
@@ -80,7 +80,7 @@ const acl =  require('./lib/nacl');
 
 Express acl uses the configuration approach to define access levels.
 
-## Configuration 
+## Configuration
 
 First step is to create a file called `nacl.json` and place this in the root folder. This is the file where we will define the roles that can access our application, and the policies that restrict or give access to certain resources. Take a look at the example below.
 
@@ -116,13 +116,13 @@ Property | Type | Description
   **permissions** | `Array` | This property contains an array of objects that define the resources exposed to a group and the methods allowed/denied
 |**resource** | `string` | This is the resource that we are either giving access to. e.g `blogs` for route `/api/blogs`, `users` for route `/api/users`. You can also specify a glob `*` for all resource/routes in your application(recommended for admin users only)
   **methods** | `string or Array` | This are http methods that a user is allowed or denied from executing. `["POST", "GET", "PUT"]`. use glob `*` if you want to include all http methods.
-  **action** | `string` | This property tell restify-acl what action to perform on the permission given. Using the above example, the user policy specifies a deny action, meaning all traffic on route `/api/users` for methods `GET, PUT, POST` are denied, but the rest allowed. And for the admin, all traffic for all resource is allowed.
+  **action** | `string` | This property tell acl-restify what action to perform on the permission given. Using the above example, the user policy specifies a deny action, meaning all traffic on route `/api/users` for methods `GET, PUT, POST` are denied, but the rest allowed. And for the admin, all traffic for all resource is allowed.
 
 #### How to write ACL rules
-ACLs define the way requests will be handled by restify acl, therefore its important to ensure that they are well designed to maximise efficiency. For more details follow this [link](https://github.com/ojengwa/restify-acl/wiki/How-to-write-effective-ACL-rules)
+ACLs define the way requests will be handled by restify acl, therefore its important to ensure that they are well designed to maximise efficiency. For more details follow this [link](https://github.com/djimenezjerez/acl-restify/wiki/How-to-write-effective-ACL-rules)
 
 ## Authentication
-restify-acl depends on the role of each authenticated user to pick the corresponding ACL policy for each defined user groups. Therefore, You should always place the acl middleware after the authenticate middleware. Example using jsonwebtoken middleware
+acl-restify depends on the role of each authenticated user to pick the corresponding ACL policy for each defined user groups. Therefore, You should always place the acl middleware after the authenticate middleware. Example using jsonwebtoken middleware
 
 ``` js
   // jsonwebtoken powered middleware
@@ -140,7 +140,7 @@ restify-acl depends on the role of each authenticated user to pick the correspon
     }
   });
 
-  // restify-acl middleware depends on the the role
+  // acl-restify middleware depends on the the role
   // the role can either be in req.decoded (jsonwebtoken)or req.session
   // (restify-session)
 
@@ -149,7 +149,7 @@ restify-acl depends on the role of each authenticated user to pick the correspon
 ```
 
 # API
-There are two API methods for restify-acl.
+There are two API methods for acl-restify.
 
 ### config[type: function, params: config { filename<string>,path<string>, yml<boolean>, encoding, baseUrl, rules}, response {}]
 
@@ -163,7 +163,7 @@ This methods loads the configuration json file. When this method it looks for `n
 - **rules**: The rules you can direct set for nacl
 
 ```js
-  const acl = require('restify-acl');
+  const acl = require('acl-restify');
 
   // path not specified
   // looks for config.json in the root folder
@@ -201,7 +201,7 @@ This is the custom error you would like returned when a user is denied access to
 
 ```js
 
-const acl = require('restify-acl');
+const acl = require('acl-restify');
 
 let configObject = {
     filename:'acl.json',
@@ -240,10 +240,10 @@ Anytime that this route is visited, unless method will exlude it from being pass
 **N/B** You don't have to install `express-unless` it has already been included into the project.
 
 # Example
-Install restify-acl
+Install acl-restify
 
 ```
-$ npm install restify-acl
+$ npm install acl-restify
 
 ```
 
@@ -264,10 +264,10 @@ Create `nacl.json` in your root folder
 
 ```
 
-Require restify-acl in your project router file.
+Require acl-restify in your project router file.
 
 ```js
-const acl = require('restify-acl');
+const acl = require('acl-restify');
 ```
 
 Call the config method
@@ -286,7 +286,7 @@ Add the acl middleware
 app.use(acl.authorize);
 ```
 
-For more details checkout the [examples folder](https://github.com/ojengwa/restify-acl/tree/master/examples).
+For more details checkout the [examples folder](https://github.com/djimenezjerez/acl-restify/tree/master/examples).
 
 # Contributions
-Pull requests are welcome. If you are adding a new feature or fixing an as-yet-untested use case, please consider writing unit tests to cover your change(s). For more information visit the contributions [page](https://github.com/ojengwa/restify-acl/wiki/contributions)
+Pull requests are welcome. If you are adding a new feature or fixing an as-yet-untested use case, please consider writing unit tests to cover your change(s). For more information visit the contributions [page](https://github.com/djimenezjerez/acl-restify/wiki/contributions)
